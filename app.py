@@ -9,6 +9,7 @@ import time
 st.set_page_config(page_title="Project Sentinel | Clinical Interface", layout="wide", initial_sidebar_state="collapsed")
 
 # --- CUSTOM ENTERPRISE CSS ---
+# FIXED: Using unsafe_allow_html=True to inject our corporate medical styling
 st.markdown("""
     <style>
     /* Global Typography and Background */
@@ -33,8 +34,7 @@ st.markdown("""
         color: #343A40;
     }
     
-    /* Data Metrics Styling */
-    [data-testid="stMetricValue"] {
+    /* Data Metrics Styling */[data-testid="stMetricValue"] {
         font-size: 2.5rem;
         font-weight: 700;
         color: #005A9C; /* Corporate Blue */
@@ -89,7 +89,7 @@ st.markdown("""
         background-color: #004070;
     }
     </style>
-""", unsafe_allow_value=True)
+""", unsafe_allow_html=True)
 
 # --- SYSTEM INITIALIZATION ---
 if 'scan_complete' not in st.session_state:
@@ -97,7 +97,7 @@ if 'scan_complete' not in st.session_state:
     st.session_state.optical_density = 0.0
 
 # --- HEADER SECTION ---
-st.markdown("<h1>3M™ PROJECT SENTINEL | CLINICAL DASHBOARD</h1>", unsafe_allow_value=True)
+st.markdown("<h1>3M™ PROJECT SENTINEL | CLINICAL DASHBOARD</h1>", unsafe_allow_html=True)
 st.markdown("**System Status:** VAE Latent Engine [ONLINE] | Spectrophotometric Calibration [VERIFIED]")
 st.markdown("---")
 
@@ -119,7 +119,7 @@ with tab_scan:
     img_file = st.camera_input("Optical Alignment Interface")
 
     if img_file:
-        # Clinical Loading Sequence (No animations, strict progress bar)
+        # Clinical Loading Sequence
         progress_bar = st.progress(0)
         st.write("Initializing optical quantification protocols...")
         time.sleep(0.5)
@@ -151,18 +151,18 @@ with tab_scan:
                     <strong>Signature Alignment:</strong> Pre-Malignant Pancreatic Ductal Neoplasia.<br>
                     <em>Refer to Clinical Pathway for immediate procedural guidelines.</em>
                 </div>
-                """, unsafe_allow_value=True)
+                """, unsafe_allow_html=True)
             else:
                 st.markdown("""
                 <div class="clinical-alert-normal">
                     <strong>NEGATIVE FINDING:</strong> Baseline expression maintained.<br>
                     <strong>Signature Alignment:</strong> Healthy Ductal Epithelium.
                 </div>
-                """, unsafe_allow_value=True)
+                """, unsafe_allow_html=True)
 
         with col_manifold:
             st.markdown("### Latent Space Projection")
-            # Scientific plotting style (no bright neon colors, clinical palette)
+            # Scientific plotting style
             df = pd.DataFrame({'X': np.random.randn(80), 'Y': np.random.randn(80), 'Z': np.random.randn(80), 'Classification': ['Baseline Cohort']*65 + ['Malignant Cohort']*15})
             patient_pt = pd.DataFrame({'X':[st.session_state.optical_density*4], 'Y':[st.session_state.optical_density*3], 'Z':[st.session_state.optical_density*5], 'Classification':['Current Subject']})
             df = pd.concat([df, patient_pt])
@@ -232,7 +232,7 @@ with tab_pathway:
             <div class="clinical-alert-critical" style="margin-bottom: 20px;">
                 <strong>PROTOCOL TRIGGERED:</strong> High Probability of Pre-Malignant Transformation
             </div>
-            """, unsafe_allow_value=True)
+            """, unsafe_allow_html=True)
             
             st.markdown("#### Phase 1: Confirmatory Imaging")
             st.write("Standard computed tomography (CT) lacks the resolution for Stage-0 detection. Recommended modalities:")
@@ -252,7 +252,7 @@ with tab_pathway:
             <div class="clinical-alert-normal" style="margin-bottom: 20px;">
                 <strong>PROTOCOL TRIGGERED:</strong> Routine Monitoring
             </div>
-            """, unsafe_allow_value=True)
+            """, unsafe_allow_html=True)
             st.write("- Maintain annual or bi-annual screening intervals utilizing the Sentinel-U assay.")
             st.write("- Standard preventative maintenance of metabolic risk factors (e.g., glycemic control).")
     else:
