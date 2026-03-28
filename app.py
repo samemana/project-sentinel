@@ -179,13 +179,13 @@ with tab_scan:
     col_cam, col_data = st.columns([1, 1.2])
 
     with col_cam:
-        st.markdown("### 📷 INITIATE SENSOR")
+        st.markdown("### INITIATE SENSOR")
         st.write("Align Sentinel-U Cassette. AI will extract spectrophotometric data.")
         img_file = st.camera_input("")
 
     with col_data:
         if img_file:
-            with st.status("🔴 INITIATING NEURAL UPLINK...", expanded=True) as status:
+            with st.status("INITIATING NEURAL UPLINK...", expanded=True) as status:
                 st.write("▰▰▱▱▱▱▱▱▱▱ Extracting Exosomal Signatures")
                 time.sleep(0.8)
                 st.write("▰▰▰▰▰▱▱▱▱▱ Quantifying Sentinel-5 Saturation")
@@ -198,13 +198,13 @@ with tab_scan:
             st.session_state.optical_density = np.random.uniform(0.850, 0.999) 
             st.session_state.scan_complete = True
             
-            st.markdown("### 📊 DIAGNOSTIC TELEMETRY")
+            st.markdown("### DIAGNOSTIC TELEMETRY")
             st.metric(label="Malignancy Probability", value=f"{st.session_state.optical_density*100:.2f}%")
             
             if st.session_state.optical_density > 0.80:
-                st.error("⚠️ CRITICAL ALIGNMENT: Transcriptomic Threshold Exceeded. Stage-0 Profile Detected.")
+                st.error("CRITICAL ALIGNMENT: Transcriptomic Threshold Exceeded. Stage-0 Profile Detected.")
             else:
-                st.success("✅ BASELINE ALIGNMENT: Healthy Ductal Expression Confirmed.")
+                st.success("BASELINE ALIGNMENT: Healthy Ductal Expression Confirmed.")
                 
         else:
             st.markdown("""
@@ -279,7 +279,7 @@ with tab_architecture:
 with tab_pathway:
     st.markdown("### // CLINICAL DIRECTIVE")
     if st.session_state.scan_complete and st.session_state.optical_density > 0.80:
-        st.error("🚨 HIGH RISK PROTOCOL ENACTED")
+        st.error("HIGH RISK PROTOCOL ENACTED")
         st.write("1. **Endoscopic Ultrasound (EUS)** required for physical verification.")
         st.write("2. **CA 19-9 Serological Panel** requisitioned.")
         st.button("ENCRYPT & TRANSMIT EMR REPORT")
